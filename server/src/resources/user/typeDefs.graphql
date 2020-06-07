@@ -7,7 +7,7 @@ enum Role {
 }
 
 type User {
-  id: ID!
+  _id: ID!
   firstName: String!
   lastName: String!
   email: String!
@@ -29,7 +29,7 @@ input AdminNewUserInput {
 }
 
 input AdminUpdateUserInput {
-  id: ID!
+  _id: ID!
   firstName: String
   lastName: String
   email: String
@@ -59,7 +59,7 @@ input SignupInput {
 
 type Query {
   currentUser: User! @authentication
-  user(id: ID!): User! @authorization(role: ADMIN)
+  user(_id: ID!): User! @authorization(role: ADMIN)
   users: [User]! @authorization(role: ADMIN)
 }
 
@@ -67,7 +67,7 @@ type Mutation {
   adminCreateUser(input: AdminNewUserInput!): User! @authorization(role: ADMIN)
   adminUpdateUser(input: AdminUpdateUserInput!): User!
     @authorization(role: ADMIN)
-  adminDeleteUser(id: ID!): User! @authorization(role: ADMIN)
+  adminDeleteUser(_id: ID!): User! @authorization(role: ADMIN)
   login(input: LoginInput!): AuthPayload!
   signup(input: SignupInput!): AuthPayload!
   updateCurrentUser(input: UpdateCurrentUserInput): User! @authentication
